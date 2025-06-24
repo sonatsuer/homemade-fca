@@ -22,6 +22,7 @@
               easy-ps.purs-tidy
               pkgs.nodejs-18_x
               pkgs.esbuild
+              pkgs.yarn
             ];
             shellHook = ''
               source <(spago --bash-completion-script `which spago`)
