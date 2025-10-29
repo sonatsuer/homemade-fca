@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     flake-utils.url = "github:numtide/flake-utils";
     easy-purescript-nix.url = "github:justinwoo/easy-purescript-nix";
   };
@@ -20,7 +20,7 @@
               easy-ps.spago
               easy-ps.purescript-language-server
               easy-ps.purs-tidy
-              pkgs.nodejs-18_x
+              pkgs.nodejs_22
               pkgs.esbuild
               pkgs.yarn
             ];

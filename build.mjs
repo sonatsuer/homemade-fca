@@ -11,7 +11,7 @@ const ctx = await esbuild
       pursPlugin(),
       copyStaticFiles({ src: "./static", dest: "./dist" })
     ],
-    logLevel: "debug"
+    //logLevel: "debug"
   })
   .catch((e) => {
     console.error(e)

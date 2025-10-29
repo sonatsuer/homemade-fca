@@ -1,8 +1,26 @@
-<html>
-    <head>
-        <title> Homemade FCA </title>
-    </head>
-    <body>
-        <script src="index.js" type="module"></script>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Homemade FCA</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body>
+  <main class="container">
+    <section>
+      <h1>Upload File</h1>
+      <input type="file" id="diagram-upload" accept=".txt, .csv">
+    </section>
+    <section>
+      <h1>Concept Lattice</h1>
+      <figure id="mermaid-output">
+      </figure>
+    </section>
+    <section>
+      <div id="error-message" style="color: red; margin-top: 10px;"></div>
+    </section>
+  </main>
+  <script src="index.js"></script>
+</body>
 </html>

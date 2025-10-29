@@ -2,7 +2,9 @@
   "scripts": {
     "dev": "concurrently 'spago build --watch' 'node ./build.mjs --watch'"
   },
-  "dependencies": {},
+  "dependencies": {
+    "mermaid": "^11.12.1"
+  },
   "devDependencies": {
     "concurrently": "^9.2.0",
     "esbuild": "^0.25.5",
