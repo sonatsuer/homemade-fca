@@ -8,7 +8,7 @@ import Effect.Console (log)
 import App.FFI (render, displayError, setupFileUploadHandler, setGeneratedMermaid)
 
 generateMermaid :: String -> Either String String
-generateMermaid = Right
+generateMermaid _ = Left "Not implemented"
 
 handleFileContent :: String -> Effect Unit
 handleFileContent rawFile =

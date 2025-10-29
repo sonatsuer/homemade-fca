@@ -3,8 +3,11 @@ module Test.Main where
 import Prelude
 
 import Effect (Effect)
-import Effect.Class.Console (log)
+import Test.Unit (test)
+import Test.Unit.Main (runTest)
+import Test.CSV (csvTests)
 
 main :: Effect Unit
-main = do
-  log "You should add some tests."
+main = runTest do
+  test "CSV " csvTests
+
