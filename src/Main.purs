@@ -5,29 +5,25 @@ import Data.Either (Either (..))
 import Effect (Effect)
 import Effect.Console (log)
 
-import App.FFI (render, displayError, setupFileUploadHandler)
+import App.FFI (render, displayError, setupFileUploadHandler, setGeneratedMermaid)
 
-preprocess :: String -> Either String String
-preprocess = Right
+generateMermaid :: String -> Either String String
+generateMermaid = Right
 
--- | 2. The Impure Handler Function (Effect)
--- | This function receives the raw file content from the FFI.
 handleFileContent :: String -> Effect Unit
-handleFileContent rawContent =
-  case preprocess rawContent of
-    Right diagramSource -> do
-      log "Preprocessing successful. Rendering graph..."
-      render diagramSource
+handleFileContent rawFile =
+  case generateMermaid rawFile of
+    Right generatedMermaid -> do
+      log "Generated Mermaid successfully. Rendering graph..."
+      setGeneratedMermaid generatedMermaid
+      render generatedMermaid
     Left err -> do
-      log ("Preprocessing failed: " <> err)
+      log ("Could not generate Mermaid: " <> err)
       displayError ("Error: " <> err)
 
 
--- | 3. Main program setup.
 main :: Effect Unit
 main = do
-  log "PureScript application started."
-  log "Setting up file upload handler with PureScript preprocessor."
-  -- Pass the impure handler function to the FFI setup handler.
+  log "Homemade FCA started."
   setupFileUploadHandler handleFileContent
   log "Ready for file uploads."

@@ -9,8 +9,13 @@
 <body>
   <main class="container">
     <section>
-      <h1>Upload File</h1>
-      <input type="file" id="diagram-upload" accept=".txt, .csv">
+      <h1>File Upload</h1>
+      <input type="file" id="diagram-upload" autocomplete="off" accept=".txt, .csv">
+      <button id="copy-button" autocomplete="off" disabled>
+        View Mermaid
+      </button>
+      <span id="copy-status"></span>
+  </div>
     </section>
     <section>
       <h1>Concept Lattice</h1>
@@ -20,6 +25,13 @@
     <section>
       <div id="error-message" style="color: red; margin-top: 10px;"></div>
     </section>
+
+    <dialog id="modal-overlay">
+    <div id="modal-content">
+      <h2>Generated Mermaid Source</h2>
+      <textarea id="modal-textarea" readonly></textarea>
+    </div>
+    </dialog>
   </main>
   <script src="index.js"></script>
 </body>
