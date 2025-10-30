@@ -1,7 +1,7 @@
 module Main where
 
 import Prelude
-import Data.Either (Either (..))
+import Data.Either (Either(..))
 import Effect (Effect)
 import Effect.Console (log)
 
@@ -20,7 +20,6 @@ handleFileContent rawFile =
     Left err -> do
       log ("Could not generate Mermaid: " <> err)
       displayError ("Error: " <> err)
-
 
 main :: Effect Unit
 main = do

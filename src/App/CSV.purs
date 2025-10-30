@@ -16,14 +16,14 @@ type CSV = NonEmptyList (NonEmptyList String)
 parseCSV :: String -> Either String CSV
 parseCSV raw = lmap errorToString (runParser csvParser raw)
   where
-    errorToString err = err.error <> " (Position: " <> show err.pos <> ")"
+  errorToString err = err.error <> " (Position: " <> show err.pos <> ")"
 
 csvParser :: Parser CSV
-csvParser =  fileP <* eof
+csvParser = fileP <* eof
   where
-    fileP = rowP `sepEndBy1` char '\n'
-    rowP = fieldP `sepBy1` char ','
-    fieldP = quotedParser <|> unquotedFieldParser <|> string ""
+  fileP = rowP `sepEndBy1` char '\n'
+  rowP = fieldP `sepBy1` char ','
+  fieldP = quotedParser <|> unquotedFieldParser <|> string ""
 
 quotedParser :: Parser String
 quotedParser = between (char '"') (char '"') $
@@ -32,12 +32,12 @@ quotedParser = between (char '"') (char '"') $
 quotedCharParser :: Parser Char
 quotedCharParser = doubleQuoteParser <|> noQuoteParser
   where
-    doubleQuoteParser = string "\"\"" $> '"'
-    noQuoteParser = noneOf ['"']
+  doubleQuoteParser = string "\"\"" $> '"'
+  noQuoteParser = noneOf [ '"' ]
 
 unquotedFieldParser ∷ Parser String
 unquotedFieldParser = listToString <$>
-  many (noneOf ['\n', '"', ','])
+  many (noneOf [ '\n', '"', ',' ])
 
 listToString :: List Char -> String
 listToString = fromFoldable >>> fromCharArray
