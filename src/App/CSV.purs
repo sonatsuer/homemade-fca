@@ -35,7 +35,7 @@ quotedCharParser = doubleQuoteParser <|> noQuoteParser
   doubleQuoteParser = string "\"\"" $> '"'
   noQuoteParser = noneOf [ '"' ]
 
-unquotedFieldParser ∷ Parser String
+unquotedFieldParser :: Parser String
 unquotedFieldParser = listToString <$>
   many (noneOf [ '\n', '"', ',' ])
 

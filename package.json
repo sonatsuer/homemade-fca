@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "dev": "concurrently 'spago build --watch' 'node ./build.mjs --watch'"
+    "dev": "concurrently 'spago build --watch' 'node ./build.mjs --watch'",
+    "prod": "concurrently 'spago build --watch' 'NODE_ENV=minify node ./build.mjs --watch'",
+    "format": "purs-tidy format-in-place \"src/**/*.purs\"; purs-tidy format-in-place \"test/**/*.purs\""
   },
   "dependencies": {
     "mermaid": "^11.12.1"
