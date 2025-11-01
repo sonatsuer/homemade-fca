@@ -4,21 +4,23 @@ import Prelude hiding (between)
 
 import Control.Alt ((<|>))
 import Data.Array (fromFoldable)
-import Data.Bifunctor (lmap)
+import Data.Array.NonEmpty (NonEmptyArray, fromFoldable1)
+import Data.Bifunctor (bimap)
 import Data.Either (Either)
-import Data.List.Types (NonEmptyList, List)
+import Data.List.Types (List, NonEmptyList)
 import Data.String.CodeUnits (fromCharArray)
 import StringParser (Parser, char, eof, noneOf, runParser, string)
 import StringParser.Combinators (between, many, sepBy1, sepEndBy1)
 
-type CSV = NonEmptyList (NonEmptyList String)
+type CSV = NonEmptyArray (NonEmptyArray String)
 
 parseCSV :: String -> Either String CSV
-parseCSV raw = lmap errorToString (runParser csvParser raw)
+parseCSV raw = bimap errorToString toArrayBases (runParser csvParser raw)
   where
   errorToString err = err.error <> " (Position: " <> show err.pos <> ")"
+  toArrayBases listBased = fromFoldable1 $ map fromFoldable1 listBased
 
-csvParser :: Parser CSV
+csvParser :: Parser (NonEmptyList (NonEmptyList String))
 csvParser = fileP <* eof
   where
   fileP = rowP `sepEndBy1` char '\n'

@@ -1,16 +1,22 @@
 { name = "halogen-project"
 , dependencies =
-  [ "console"
-  , "effect"
-  , "prelude"
-  , "either"
-  , "string-parsers"
+  [ "arrays"
   , "bifunctors"
-  , "arrays"
+  , "console"
   , "control"
+  , "effect"
+  , "either"
+  , "foldable-traversable"
   , "lists"
+  , "maybe"
+  , "ordered-collections"
+  , "prelude"
+  , "string-parsers"
   , "strings"
+  , "tailrec"
   , "test-unit"
+  , "transformers"
+  , "tuples"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]

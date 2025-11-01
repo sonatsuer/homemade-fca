@@ -4,9 +4,7 @@ import Prelude
 
 import App.CSV (CSV, parseCSV)
 import Data.Either (Either(..))
-import Data.List (fromFoldable)
-import Data.List.NonEmpty (cons')
-import Data.List.Types (List, NonEmptyList)
+import Data.Array.NonEmpty (cons')
 import Test.Unit (Test)
 import Test.Unit.Assert (equal')
 
@@ -15,26 +13,26 @@ csvTests = do
   compareCSV "Simple CSV" "ab,cd,uu\nss,,\nuu,ss,vv" simpleSample
   compareCSV "Quoted CSV" "\"a,b\",cd,uu\n\"s \"\"hhs\",,\nuu , ss, vv " quotedSample
 
-simpleSample :: CSV
-simpleSample = mkNonempty r1 $ fromFoldable [ r2, r3 ]
-  where
-  r1 = mkNonempty "ab" $ fromFoldable [ "cd", "uu" ]
-  r2 = mkNonempty "ss" $ fromFoldable [ "", "" ]
-  r3 = mkNonempty "uu" $ fromFoldable [ "ss", "vv" ]
-
-quotedSample :: CSV
-quotedSample = mkNonempty r1 $ fromFoldable [ r2, r3 ]
-  where
-  r1 = mkNonempty "a,b" $ fromFoldable [ "cd", "uu" ]
-  r2 = mkNonempty "s \"hhs" $ fromFoldable [ "", "" ]
-  r3 = mkNonempty "uu " $ fromFoldable [ " ss", " vv " ]
-
-mkNonempty :: forall a. a -> List a -> NonEmptyList a
-mkNonempty a as = a `cons'` as
-
 compareCSV :: String -> String -> CSV -> Test
 compareCSV name raw expected = equal' msg result wrappedExpected
   where
   result = parseCSV raw
   wrappedExpected = Right expected
-  msg = name <> "\nExpected: " <> show wrappedExpected <> "\n Got: " <> show result
+  msg = name <> "\nExpected : " <> show wrappedExpected
+    <> "\nGot      : "
+    <> show result
+
+simpleSample :: CSV
+simpleSample = r1 `cons'` [ r2, r3 ]
+  where
+  r1 = "ab" `cons'` [ "cd", "uu" ]
+  r2 = "ss" `cons'` [ "", "" ]
+  r3 = "uu" `cons'` [ "ss", "vv" ]
+
+quotedSample :: CSV
+quotedSample = r1 `cons'` [ r2, r3 ]
+  where
+  r1 = "a,b" `cons'` [ "cd", "uu" ]
+  r2 = "s \"hhs" `cons'` [ "", "" ]
+  r3 = "uu " `cons'` [ " ss", " vv " ]
+

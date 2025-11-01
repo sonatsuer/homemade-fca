@@ -16,7 +16,7 @@
           default = pkgs.mkShell {
             name = "purescript-custom-shell";
             buildInputs = [
-              easy-ps.purs-0_15_8
+              easy-ps.purs-0_15_15
               easy-ps.spago
               easy-ps.purescript-language-server
               easy-ps.purs-tidy

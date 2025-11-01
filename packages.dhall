@@ -1,4 +1,5 @@
 let upstream =
-      https://github.com/purescript/package-sets/releases/download/psc-0.15.4-20220816/packages.dhall sha256:8b4467b4b5041914f9b765779c8936d6d4c230b1f60eb64f6269c71812fd7e98
+      https://github.com/purescript/package-sets/releases/download/psc-0.15.15-20251031/packages.dhall
+        sha256:b8ac6414835870ce97e7de8521fa09f2d761b379554b21901ab93843a03ef968
 
 in  upstream
