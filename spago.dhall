@@ -7,6 +7,7 @@
   , "effect"
   , "either"
   , "foldable-traversable"
+  , "integers"
   , "lists"
   , "maybe"
   , "ordered-collections"

@@ -7,9 +7,11 @@ import Test.Unit (test)
 import Test.Unit.Main (runTest)
 import Test.CSV (csvTests)
 import Test.FCA (fcaTests)
+import Test.TransitiveReduction (transitiveReductionTests)
 
 main :: Effect Unit
 main = runTest do
   test "CSV " csvTests
   test "FCA" fcaTests
+  test "Transitive reduction" transitiveReductionTests
 
