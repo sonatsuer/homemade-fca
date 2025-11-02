@@ -70,7 +70,7 @@ export const setupFileUploadHandler = function (handleFn) {
         displayError(`Error reading file: ${e.target.error.name}`)();
       };
 
-      reader.readAsText(file);
+      reader.readAsText(file, 'UTF-8');
     });
   };
 };

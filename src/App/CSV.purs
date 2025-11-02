@@ -23,9 +23,12 @@ parseCSV raw = bimap errorToString toArrayBased (runParser csvParser raw)
 csvParser :: Parser (NonEmptyList (NonEmptyList String))
 csvParser = fileP <* eof
   where
-  fileP = rowP `sepEndBy1` char '\n'
+  fileP = rowP `sepEndBy1` newlineP
   rowP = fieldP `sepBy1` char ','
   fieldP = quotedParser <|> unquotedFieldParser <|> string ""
+
+newlineP :: Parser Unit
+newlineP = void $ string "\r\n" <|> string "\r" <|> string "\n"
 
 quotedParser :: Parser String
 quotedParser = between (char '"') (char '"') $
@@ -39,7 +42,7 @@ quotedCharParser = doubleQuoteParser <|> noQuoteParser
 
 unquotedFieldParser :: Parser String
 unquotedFieldParser = listToString <$>
-  many (noneOf [ '\n', '"', ',' ])
+  many (noneOf [ '\r', '\n', '"', ',' ])
 
 listToString :: List Char -> String
 listToString = fromFoldable >>> fromCharArray
