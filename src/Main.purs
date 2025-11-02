@@ -1,14 +1,12 @@
 module Main (main) where
 
 import Prelude
+
+import App.FFI (render, displayError, setupFileUploadHandler, setGeneratedMermaid)
+import App.Mermaid (generateMermaid)
 import Data.Either (Either(..))
 import Effect (Effect)
 import Effect.Console (log)
-
-import App.FFI (render, displayError, setupFileUploadHandler, setGeneratedMermaid)
-
-generateMermaid :: String -> Either String String
-generateMermaid _ = Left "Not implemented"
 
 handleFileContent :: String -> Effect Unit
 handleFileContent rawFile =

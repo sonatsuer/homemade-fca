@@ -15,10 +15,10 @@ import StringParser.Combinators (between, many, sepBy1, sepEndBy1)
 type CSV = NonEmptyArray (NonEmptyArray String)
 
 parseCSV :: String -> Either String CSV
-parseCSV raw = bimap errorToString toArrayBases (runParser csvParser raw)
+parseCSV raw = bimap errorToString toArrayBased (runParser csvParser raw)
   where
   errorToString err = err.error <> " (Position: " <> show err.pos <> ")"
-  toArrayBases listBased = fromFoldable1 $ map fromFoldable1 listBased
+  toArrayBased listBased = fromFoldable1 $ map fromFoldable1 listBased
 
 csvParser :: Parser (NonEmptyList (NonEmptyList String))
 csvParser = fileP <* eof

@@ -1,16 +1,17 @@
 module App.FCA
   ( AttributeKey(..)
   , ObjectKey
-  , FCA
   , computeAllIntents
   , generateFormalContext
+  , computeAllConcepts
+  , Concept(..)
   , FormalContext
   ) where
 
 import Prelude
 
 import App.CSV (CSV)
-import Control.Monad.Reader (Reader, asks)
+import Control.Monad.Reader (Reader, asks, runReader)
 import Control.Monad.Rec.Class (Step(..), tailRecM)
 import Data.Array (filter, mapWithIndex, nub, null, sortBy, transpose, uncons, (..))
 import Data.Array.NonEmpty (NonEmptyArray)
@@ -19,7 +20,7 @@ import Data.Either (Either(..), note)
 import Data.Foldable (foldl)
 import Data.Map (Map)
 import Data.Map as Map
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Set (Set)
 import Data.Set as Set
 import Data.Tuple (Tuple(..), fst, snd)
@@ -147,8 +148,19 @@ stepAllIntents collected = do
       Just nextIntent ->
         Loop $ nextIntent `NE.cons` collected
 
-computeAllIntents :: FCA (NonEmptyArray (Set AttributeKey))
-computeAllIntents = do
+computeAllIntents :: FormalContext -> (NonEmptyArray (Set AttributeKey))
+computeAllIntents ctx = flip runReader ctx do
   smallestIntent <- intentClosure Set.empty
   tailRecM stepAllIntents (NE.singleton smallestIntent)
 
+type Concept = { intent :: Set String, extent :: Set String }
+
+computeAllConcepts :: FormalContext -> (NonEmptyArray Concept)
+computeAllConcepts ctx = map intoContext (computeAllIntents ctx)
+  where
+  attributeTranslator attributeKey = fromMaybe "<missing>" $ Map.lookup attributeKey ctx.attributes
+  objectTranslator objectKey = fromMaybe "<missing>" $ Map.lookup objectKey ctx.objects
+  intoContext intent =
+    { intent: Set.map attributeTranslator intent
+    , extent: Set.map objectTranslator (runReader (computeExtent intent) ctx)
+    }

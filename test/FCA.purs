@@ -4,7 +4,6 @@ import Prelude
 
 import App.CSV (CSV)
 import App.FCA (AttributeKey(..), computeAllIntents, generateFormalContext)
-import Control.Monad.Reader (runReader)
 import Data.Array.NonEmpty (NonEmptyArray, cons')
 import Data.Either (Either(..))
 import Test.Unit (Test)
@@ -23,7 +22,7 @@ fcaTests = do
 compareIntents :: String -> CSV -> Either String (NonEmptyArray (Set AttributeKey)) -> Test
 compareIntents name csv expected = equal' msg result expected
   where
-  result = runReader computeAllIntents <$> generateFormalContext csv
+  result = computeAllIntents <$> generateFormalContext csv
   msg = name <> "\nExpected :" <> show expected
     <> "\nGot      :"
     <> show result
