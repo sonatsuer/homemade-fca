@@ -5,29 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Homemade FCA</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <style>
+    .btn-small-inline {
+      --pico-form-element-spacing-vertical: 0.25rem; /* Very small vertical padding */
+      --pico-form-element-spacing-horizontal: 0.5rem;  /* Small horizontal padding */
+      display: inline-block;
+      width: auto;
+      font-size: 0.9em;
+      line-height: 1;
+    }
+  </style>
 </head>
 <body>
   <main class="container">
+    <h1>Homemade Formal Concept Analysis</h1>
     <section>
-      <h1>File Upload</h1>
+      <h2><em>What is this?</em></h2>
+      <p>Formal concept analysis is a tool to convert data represented as a boolean
+         matrix into a hierarchy. The mechanism is a little technical to be explained here
+         but there are plenty of explanations on the Internet. With this tool, you can generate
+         a hierarchy from a CSV file. In the CSV file, empty cells are interpreted as
+         false and all other cells are interpreted as true. You can also see the generated
+         Mermaid syntax code to process it in other applications.
+  </button>
+      </p>
+      <p>To get an idea of what you can generate, click
+        <button id="sample-button" class="btn-small-inline">view sample</button>
+         to see the hierarchy corresponding to the matrix below.
+      </p>
+    </section>
+    <section>
+        <div class="overflow-auto">
+          <table class="striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Heading</th>
+                <th scope="col">Heading</th>
+                <th scope="col">Heading</th>
+                <th scope="col">Heading</th>
+                <th scope="col">Heading</th>
+                <th scope="col">Heading</th>
+                <th scope="col">Heading</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    <section>
+      <h2><em>Generate a Hierarchy!</em></h2>
+      <p>Use the browse button to choose a CSV file. After generating the hierarchy you
+         can click <button id="copy-button" disabled class="btn-small-inline">view code</button>
+         to see the generated Mermaid syntax code.
+      </p>
       <input type="file" id="diagram-upload" autocomplete="off" accept=".txt, .csv">
-      <button id="copy-button" autocomplete="off" disabled>
-        View Mermaid
-      </button>
-      <span id="copy-status"></span>
-    </section>
     <section>
-      <h1>Concept Lattice</h1>
-      <figure id="mermaid-output">
-      </figure>
-    </section>
-    <section>
+      <figure id="mermaid-output"></figure>
       <div id="error-message" style="color: red; margin-top: 10px;"></div>
     </section>
-
     <dialog id="modal-overlay">
     <div id="modal-content">
-      <h2>Generated Mermaid Source</h2>
+      <h2>Generated Mermaid Syntax Code</h2>
       <textarea id="modal-textarea" readonly></textarea>
     </div>
     </dialog>

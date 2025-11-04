@@ -94,7 +94,6 @@ export const setGeneratedMermaid = function (content) {
     const modalOverlay = document.getElementById("modal-overlay");
 
     copyButton.disabled = false;
-    document.getElementById("copy-status").textContent = "";
 
     if (!copyButton.hasClickListener) {
         setupModalListeners();
