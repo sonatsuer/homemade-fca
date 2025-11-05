@@ -1,12 +1,10 @@
-module App.FFI (render, displayError, setupFileUploadHandler, setGeneratedMermaid) where
+module App.FFI (renderAndDisplayCode, displayError, setupFileReadHandler) where
 
 import Prelude
 import Effect (Effect)
 
-foreign import render :: String -> Effect Unit
+foreign import renderAndDisplayCode :: String -> Effect Unit
 
 foreign import displayError :: String -> Effect Unit
 
-foreign import setupFileUploadHandler :: (String -> Effect Unit) -> Effect Unit
-
-foreign import setGeneratedMermaid :: String -> Effect Unit
+foreign import setupFileReadHandler :: (String -> Effect Unit) -> Effect Unit
