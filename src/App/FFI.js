@@ -1,13 +1,21 @@
 import mermaid from "mermaid";
 
-"use strict";
+("use strict");
 
+function isDarkMode() {
+  return (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
+}
+
+const theme = isDarkMode() ? "dark" : "default";
 mermaid.initialize({
   startOnLoad: false,
-  theme: "default",
+  theme: theme,
 });
 
-const exampleMermaid =`
+const exampleMermaid = `
 graph BT
   Concept_3["\{Grow on Trees, Small Size, Tropical\}
 \{Date\}"]
@@ -32,8 +40,8 @@ graph BT
   Concept_6 --> Concept_2
   Concept_6 --> Concept_4
   Concept_6 --> Concept_5
-`
-const exampleDiv = document.getElementById("mermaid-example")
+`;
+const exampleDiv = document.getElementById("mermaid-example");
 if (exampleDiv) {
   mermaid
     .render("mermaid-example-temp-id", exampleMermaid)
@@ -84,11 +92,10 @@ export const displayError = function (message) {
   };
 };
 
-
 export const setupFileReadHandler = function (handleFn) {
   return function () {
-    const fileInput = document.getElementById('csv-read');
-    const errorDiv = document.getElementById('error-message');
+    const fileInput = document.getElementById("csv-read");
+    const errorDiv = document.getElementById("error-message");
 
     if (!fileInput) {
       console.error("File input #csv-read not found.");
@@ -113,8 +120,7 @@ export const setupFileReadHandler = function (handleFn) {
         displayError(`Error reading file: ${e.target.error.name}`)();
       };
 
-      reader.readAsText(file, 'UTF-8');
+      reader.readAsText(file, "UTF-8");
     });
   };
 };
-
