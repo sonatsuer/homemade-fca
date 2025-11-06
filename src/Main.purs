@@ -22,4 +22,4 @@ main :: Effect Unit
 main = do
   log "Homemade FCA started."
   setupFileReadHandler handleFileContent
-  log "Ready for file uploads."
+  log "Ready to read CSVs."

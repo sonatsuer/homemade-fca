@@ -17,20 +17,13 @@ mermaid.initialize({
 
 const exampleMermaid = `
 graph BT
-  Concept_3["\{Grow on Trees, Small Size, Tropical\}
-\{Date\}"]
-  Concept_1["\{Grow on Trees, Red Color, Small Size\}
-\{Cherry\}"]
-  Concept_0["\{Grow on Trees, Red Color, Small Size, Tropical\}
-\{\}"]
-  Concept_2["\{Grow on Trees, Red Color\}
-\{Apple, Cherry\}"]
-  Concept_5["\{Grow on Trees, Tropical\}
-\{Banana, Date\}"]
-  Concept_4["\{Grow on Trees, Small Size\}
-\{Cherry, Date\}"]
-  Concept_6["\{Grow on Trees\}
-\{Apple, Banana, Cherry, Date\}"]
+  Concept_3["\{Grow on Trees, Small Size, Tropical\}<br/>-----<br/>\{Date\}"]
+  Concept_1["\{Grow on Trees, Red Color, Small Size\}<br/>-----<br/>\{Cherry\}"]
+  Concept_0["\{Grow on Trees, Red Color, Small Size, Tropical\}<br/>-----<br/>\{\}"]
+  Concept_2["\{Grow on Trees, Red Color\}<br/>-----<br/>\{Apple, Cherry\}"]
+  Concept_5["\{Grow on Trees, Tropical\}<br/>-----<br/>\{Banana, Date\}"]
+  Concept_4["\{Grow on Trees, Small Size\}<br/>-----<br/>\{Cherry, Date\}"]
+  Concept_6["\{Grow on Trees\}<br/>-----<br/>\{Apple, Banana, Cherry, Date\}"]
   Concept_3 --> Concept_0
   Concept_1 --> Concept_0
   Concept_2 --> Concept_1

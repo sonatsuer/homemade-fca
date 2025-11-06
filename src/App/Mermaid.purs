@@ -60,7 +60,7 @@ convertToMermaid conceptMap successorMap = "graph BT\n" <> definitions <> connec
     mkName i
       <> "[\"\\{"
       <> commaSeparated c.intent
-      <> "\\}\n\\{"
+      <> "\\}<br/>-----<br/>\\{"
       <> commaSeparated c.extent
       <> "\\}\"]"
   definitions = indentedBlock $ map mkNamedConcept (flatten conceptMap)
