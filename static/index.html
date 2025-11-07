@@ -9,14 +9,6 @@
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
     />
     <style>
-      .btn-small-inline {
-        --pico-form-element-spacing-vertical: 0.25rem; /* Very small vertical padding */
-        --pico-form-element-spacing-horizontal: 0.5rem; /* Small horizontal padding */
-        display: inline-block;
-        width: auto;
-        font-size: 0.9em;
-        line-height: 1;
-      }
       th,
       td {
         text-align: center;
@@ -103,7 +95,12 @@
       <section id="lattice-generator">
         <h2><em>Generate a Concept Lattice!</em></h2>
         <p>Use the browse button to choose a CSV file.</p>
-        <input type="file" id="csv-read" autocomplete="off" accept=".txt, .csv" />
+        <input
+          type="file"
+          id="csv-read"
+          autocomplete="off"
+          accept=".txt, .csv"
+        />
         <section>
           <h4>Mermaid code for the generated concept lattice</h4>
           <textarea id="code-textarea" autocomplete="off" readonly>

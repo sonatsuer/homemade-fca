@@ -75,15 +75,21 @@ extractSelected keyMaker =
       Set.fromFoldable
 
 generateFormalContext :: CSV -> Either String FormalContext
-generateFormalContext csv = do
+generateFormalContext initialCSV = do
+  let csv = postProcessCSV initialCSV
   let differentRowSizes = NE.length $ NE.nub $ map NE.length csv
-  when (differentRowSizes /= 1) (Left "Found rows of different sizes")
+  when (differentRowSizes /= 1) (Left $ "Found rows of different sizes" <> show csv)
   objects <- note "Duplicate object name" $ mkUniqueMap ObjectKey $ NE.tail $ map NE.head csv
   attributes <- note "Duplicate attribute name" $ mkUniqueMap AttributeKey $ NE.tail $ NE.head csv
   let matrix = NE.tail $ map NE.tail csv
   let attributeExtent = mkKeyed AttributeKey $ map (extractSelected ObjectKey) $ transpose matrix
   let objectIntent = mkKeyed ObjectKey $ map (extractSelected AttributeKey) matrix
   Right { objects, attributes, attributeExtent, objectIntent }
+
+postProcessCSV :: CSV -> CSV
+postProcessCSV csv = NE.head csv `NE.cons'` (removeRedundant $ NE.tail csv)
+  where
+  removeRedundant = filter ((/=) (NE.cons' "" []))
 
 intersectAll :: forall a b. Ord a => Ord b => Set b -> Map a (Set b) -> Set a -> Set b
 intersectAll top m = Set.mapMaybe (flip Map.lookup m) >>> foldl Set.intersection top
