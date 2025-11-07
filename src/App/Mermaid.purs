@@ -3,7 +3,7 @@ module App.Mermaid (generateMermaid) where
 import Data.Array (concatMap, foldMap, intercalate)
 import Prelude (bind, map, show, ($), (<$>), (<>), (>>>))
 
-import App.CSV (parseCSV, CSV)
+import App.CSV (parseCSV)
 import App.FCA (Concept, computeAllConcepts, generateFormalContext)
 import App.TransitiveReduction (immediateSuccessors)
 import Control.Apply (lift2)

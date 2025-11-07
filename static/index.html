@@ -26,27 +26,24 @@
         <h2><em>What is this?</em></h2>
         <p>
           Formal concept analysis is a tool for converting data represented as a
-          boolean matrix into a visaulisable hierarchy to make it easier to
+          boolean matrix into a visualizable hierarchy to make it easier to
           understand. The booelan matrix is called a <em>formal concept</em> and
           the hierarchy generated from the formal concept is called a
-          <em>formal lattice</em>. The generation mechanism is a little
-          technical to be explained here but there are plenty of explanations on
-          the Internet.
+          <em>formal lattice</em>.
         </p>
         <p>
           Using this page, you can generate a hierarchy from a CSV file. In the
           CSV file, empty cells are interpreted as false and all other cells are
-          interpreted as true. You can also see the generated Mermaid code to
-          process it in other applications.
+          interpreted as true. You can also see the generated
+          <a href="https://mermaid.js.org/" target="_blank" rel="noopener noreferrer">Mermaid</a>
+          code to process it in other applications.
         </p>
         <p>
-          To get an idea of what kind of output this page generates, here is an
-          example of a formal context and the formal concept lattice
-          corresponding to it. to see the concept lattice corresponding to the
-          formal context below.
+          Here is an example.
         </p>
       </section>
       <section>
+        <h4>A formal context of fruit and their attributes</h4>
         <div class="overflow-auto">
           <table class="striped">
             <thead>
@@ -90,6 +87,7 @@
             </tbody>
           </table>
         </div>
+        <h4>The resulting formal concept</h4>
         <figure id="mermaid-example"></figure>
       </section>
       <section id="lattice-generator">

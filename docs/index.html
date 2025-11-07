@@ -1,37 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Homemade FCA</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-</head>
-<body>
-  <main class="container">
-    <section>
-      <h1>File Upload</h1>
-      <input type="file" id="diagram-upload" autocomplete="off" accept=".txt, .csv">
-      <button id="copy-button" autocomplete="off" disabled>
-        View Mermaid
-      </button>
-      <span id="copy-status"></span>
-    </section>
-    <section>
-      <h1>Concept Lattice</h1>
-      <figure id="mermaid-output">
-      </figure>
-    </section>
-    <section>
-      <div id="error-message" style="color: red; margin-top: 10px;"></div>
-    </section>
-
-    <dialog id="modal-overlay">
-    <div id="modal-content">
-      <h2>Generated Mermaid Source</h2>
-      <textarea id="modal-textarea" readonly></textarea>
-    </div>
-    </dialog>
-  </main>
-  <script src="index.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Homemade FCA</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <style>
+      th,
+      td {
+        text-align: center;
+      }
+      textarea {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Homemade Formal Concept Analysis</h1>
+      <section>
+        <h2><em>What is this?</em></h2>
+        <p>
+          Formal concept analysis is a tool for converting data represented as a
+          boolean matrix into a visualizable hierarchy to make it easier to
+          understand. The booelan matrix is called a <em>formal concept</em> and
+          the hierarchy generated from the formal concept is called a
+          <em>formal lattice</em>.
+        </p>
+        <p>
+          Using this page, you can generate a hierarchy from a CSV file. In the
+          CSV file, empty cells are interpreted as false and all other cells are
+          interpreted as true. You can also see the generated
+          <a href="https://mermaid.js.org/" target="_blank" rel="noopener noreferrer">Mermaid</a>
+          code to process it in other applications.
+        </p>
+        <p>
+          Here is an example.
+        </p>
+      </section>
+      <section>
+        <h4>A formal context of fruit and their attributes</h4>
+        <div class="overflow-auto">
+          <table class="striped">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Red Color</th>
+                <th scope="col">Grow on Trees</th>
+                <th scope="col">Small Size</th>
+                <th scope="col">Tropical</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Apple</th>
+                <td>X</td>
+                <td>X</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Banana</th>
+                <td></td>
+                <td>X</td>
+                <td></td>
+                <td>X</td>
+              </tr>
+              <tr>
+                <th scope="row">Cherry</th>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Date</th>
+                <td></td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h4>The resulting formal concept</h4>
+        <figure id="mermaid-example"></figure>
+      </section>
+      <section id="lattice-generator">
+        <h2><em>Generate a Concept Lattice!</em></h2>
+        <p>Use the browse button to choose a CSV file.</p>
+        <input
+          type="file"
+          id="csv-read"
+          autocomplete="off"
+          accept=".txt, .csv"
+        />
+        <section>
+          <h4>Mermaid code for the generated concept lattice</h4>
+          <textarea id="code-textarea" autocomplete="off" readonly>
+Mermaid code will appear here.
+          </textarea>
+        </section>
+        <section>
+          <h4>Concept lattice rendered by Mermaid</h4>
+          <figure id="mermaid-output">
+            <p><em>Concept lattice will appear here.</em></p>
+          </figure>
+          <div id="error-message" style="color: red; margin-top: 10px"></div>
+        </section>
+      </section>
+    </main>
+    <script src="index.js"></script>
+  </body>
 </html>

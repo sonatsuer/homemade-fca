@@ -78,7 +78,7 @@ generateFormalContext :: CSV -> Either String FormalContext
 generateFormalContext initialCSV = do
   let csv = postProcessCSV initialCSV
   let differentRowSizes = NE.length $ NE.nub $ map NE.length csv
-  when (differentRowSizes /= 1) (Left $ "Found rows of different sizes" <> show csv)
+  when (differentRowSizes /= 1) (Left $ "Found rows of different sizes")
   objects <- note "Duplicate object name" $ mkUniqueMap ObjectKey $ NE.tail $ map NE.head csv
   attributes <- note "Duplicate attribute name" $ mkUniqueMap AttributeKey $ NE.tail $ NE.head csv
   let matrix = NE.tail $ map NE.tail csv
